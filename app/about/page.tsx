@@ -5,7 +5,7 @@ import { projects } from "@/lib/projects";
 
 export const metadata: Metadata = {
   title: "About",
-  description: "About page structure for experience, education, skills, resume, and contact links."
+  description: "About Chunjie Wang, an architectural designer based in Los Angeles."
 };
 
 export default function AboutPage() {
@@ -14,22 +14,52 @@ export default function AboutPage() {
       <div className="site-grid items-end border-b hairline pb-12">
         <div className="col-span-12 md:col-span-7">
           <p className="meta-label">About</p>
-          <h1 className="mt-4 text-5xl leading-none md:text-7xl">Designer profile placeholder.</h1>
+          <h1 className="mt-4 text-5xl leading-none md:text-7xl">Chunjie Wang is an architectural designer based in Los Angeles.</h1>
         </div>
-        <ImageFrame src={projects[2].cover} alt="About portrait placeholder" className="col-span-12 aspect-[4/5] md:col-span-4 md:col-start-9" priority />
+        <ImageFrame src="/images/profile/portrait.png" alt="Portrait of Chunjie Wang" className="col-span-12 aspect-[4/5] md:col-span-4 md:col-start-9" priority />
       </div>
       <div className="site-grid border-b hairline py-14">
         <p className="meta-label col-span-12 md:col-span-3">Introduction</p>
         <p className="col-span-12 text-3xl leading-tight md:col-span-7">
-          Placeholder biography text for professional positioning, design interests, technical strengths, and collaborative values.
+          I am an architectural designer with experience across conceptual design, schematic design, design development, construction documentation, visualization, and presentation work. My background combines architectural studies in China and the United States with design research, competition work, and professional practice.
         </p>
       </div>
-      <ProfileSection title="Experience" items={["Studio / Office Placeholder", "Internship Placeholder", "Research Assistant Placeholder"]} />
-      <ProfileSection title="Education" items={["Architecture Degree Placeholder", "Exchange Studio Placeholder"]} />
-      <ProfileSection title="Skills" items={["Design: Rhino, Revit, Adobe Suite", "Visualization: Rendering, diagrams, models", "Technical: drawings, documentation, coordination"]} />
+      <ProfileSection
+        title="Experience"
+        items={[
+          "WHY Architecture, Intern / 2025-2026",
+          "Louvre Museum Byzantine Route and Islamic Route: spatial design, schematic design, design development, construction documentation, visualization",
+          "OMA Venice Studio / 2024"
+        ]}
+      />
+      <ProfileSection
+        title="Education"
+        items={[
+          "SCI-Arc, M.Arch 1 / 2022-2025",
+          "Kean University, International Program / 2019-2020",
+          "Wenzhou-Kean University, B.A. Architectural Studies / 2018-2022"
+        ]}
+      />
+      <ProfileSection
+        title="Selected Work"
+        items={[
+          "Living Ruins / 2024",
+          "Kinder Space / 2024",
+          "Denver SingleStairs / 2024",
+          "Architecture, Culture and Agriculture: The Challenges of Urbanization / 2020"
+        ]}
+      />
+      <ProfileSection
+        title="Skills"
+        items={[
+          "Design and modeling: Rhino, Revit, AutoCAD, Grasshopper, Cinema 4D, ZBrush",
+          "Visualization: D5 Render, Adobe Suite, Midjourney, Runway",
+          "Documentation and presentation: construction drawings, diagrams, layouts, Microsoft Office"
+        ]}
+      />
       <div className="pt-12">
         <Link href="/contact" className="focus-ring inline-block border-b border-ink pb-2 text-lg">
-          Resume and contact links
+          Contact and resume details
         </Link>
       </div>
     </section>

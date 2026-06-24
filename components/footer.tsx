@@ -6,8 +6,8 @@ export function Footer() {
       <div className="site-grid items-end">
         <div className="col-span-12 md:col-span-6">
           <p className="meta-label">Contact</p>
-          <Link className="mt-3 block text-2xl md:text-4xl" href="mailto:hello@example.com">
-            hello@example.com
+          <Link className="mt-3 block text-2xl md:text-4xl" href="mailto:wangchunjiecj@gmail.com">
+            wangchunjiecj@gmail.com
           </Link>
         </div>
         <div className="col-span-12 flex gap-5 md:col-span-6 md:justify-end">
