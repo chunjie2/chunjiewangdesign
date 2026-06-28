@@ -58,7 +58,9 @@ const dancingTheater: Project = {
     {
       type: "fullImage",
       image: dancingTheaterImage("cover.png"),
-      caption: "Exterior visualization."
+      caption: "Exterior visualization.",
+      fit: "contain",
+      aspectRatio: "1050 / 743"
     },
     {
       type: "textImage",
