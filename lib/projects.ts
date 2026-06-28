@@ -1,7 +1,7 @@
 export type ProjectCategory = "housing" | "civic" | "cultural" | "workplace" | "research";
 
 export type ProjectModule =
-  | { type: "fullImage"; image: string; caption: string }
+  | { type: "fullImage"; image: string; caption: string; fit?: "cover" | "contain"; aspectRatio?: string }
   | { type: "twoColumnImages"; images: { src: string; caption: string }[] }
   | { type: "textImage"; heading: string; text: string; image: string }
   | { type: "drawing"; title: string; image: string; note: string }
@@ -91,7 +91,9 @@ const dancingTheater: Project = {
     {
       type: "fullImage",
       image: dancingTheaterImage("model-elevations-01.png"),
-      caption: "Physical model elevations."
+      caption: "Physical model elevations.",
+      fit: "contain",
+      aspectRatio: "1428 / 1306"
     },
     {
       type: "twoColumnImages",

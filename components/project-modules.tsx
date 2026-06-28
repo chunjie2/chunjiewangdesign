@@ -50,7 +50,13 @@ function ProjectModuleRenderer({ module, onOpen }: { module: ProjectModule; onOp
     return (
       <figure>
         <button className="block w-full focus-ring" type="button" onClick={() => onOpen(module.image)}>
-          <ImageFrame src={module.image} alt={module.caption} className="aspect-[16/9]" />
+          <ImageFrame
+            src={module.image}
+            alt={module.caption}
+            className={module.aspectRatio ? "w-full" : "aspect-[16/9]"}
+            fit={module.fit}
+            style={module.aspectRatio ? { aspectRatio: module.aspectRatio } : undefined}
+          />
         </button>
         <figcaption className="page-x meta-label mt-3">{module.caption}</figcaption>
       </figure>
