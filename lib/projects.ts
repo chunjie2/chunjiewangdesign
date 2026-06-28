@@ -41,7 +41,81 @@ export const categories: { value: ProjectCategory | "all"; label: string }[] = [
   { value: "research", label: "Research" }
 ];
 
+const dancingTheaterImage = (file: string) => `/images/project-03-dancing-theater/${file}`;
+
+const dancingTheater: Project = {
+  slug: "project-03",
+  title: "Dancing Theater",
+  category: "cultural",
+  year: "TBD",
+  location: "Location TBD",
+  status: "Academic Project",
+  role: "Design, drawings, physical model, visualization",
+  featured: true,
+  cover: dancingTheaterImage("cover.png"),
+  summary: "Project introduction placeholder. Final project description and design narrative will be added later.",
+  modules: [
+    {
+      type: "fullImage",
+      image: dancingTheaterImage("cover.png"),
+      caption: "Exterior visualization."
+    },
+    {
+      type: "textImage",
+      heading: "Information Flow",
+      text: "Placeholder text for the project's research, performance typologies, and spatial concept.",
+      image: dancingTheaterImage("concept-information-flow.jpg")
+    },
+    {
+      type: "twoColumnImages",
+      images: [
+        { src: dancingTheaterImage("diagram-form-assets.png"), caption: "Form asset study." },
+        { src: dancingTheaterImage("process-composition-study.png"), caption: "Composition study." }
+      ]
+    },
+    {
+      type: "fullImage",
+      image: dancingTheaterImage("model-overview-01.png"),
+      caption: "Physical model overview 01."
+    },
+    {
+      type: "fullImage",
+      image: dancingTheaterImage("model-overview-02.png"),
+      caption: "Physical model overview 02."
+    },
+    {
+      type: "fullImage",
+      image: dancingTheaterImage("model-detail-01.png"),
+      caption: "Physical model detail."
+    },
+    {
+      type: "fullImage",
+      image: dancingTheaterImage("model-elevations-01.png"),
+      caption: "Physical model elevations."
+    },
+    {
+      type: "twoColumnImages",
+      images: [
+        { src: dancingTheaterImage("plan-top-floor-lobby.png"), caption: "Top floor plan / lobby." },
+        { src: dancingTheaterImage("plan-top-floor-lobby-portfolio.png"), caption: "Top floor plan / portfolio layout." }
+      ]
+    },
+    {
+      type: "drawing",
+      title: "Black Box Theaters",
+      image: dancingTheaterImage("section-black-box-theaters.png"),
+      note: "Section"
+    },
+    {
+      type: "contribution",
+      items: ["Concept development", "Physical and digital modeling", "Drawings and presentation package"]
+    }
+  ]
+};
+
 export const projects: Project[] = Array.from({ length: 12 }, (_, index) => {
+  if (index === 2) return dancingTheater;
+
   const category = categories[(index % (categories.length - 1)) + 1].value as ProjectCategory;
   return {
     slug: `project-${String(index + 1).padStart(2, "0")}`,
