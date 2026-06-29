@@ -18,13 +18,13 @@ export default function HomePage() {
             <h1 className="mt-5 text-6xl leading-[0.94] md:text-8xl lg:text-9xl">Selected architectural works and spatial research.</h1>
           </div>
           <div className="col-span-12 md:col-span-4 md:col-start-9">
-            <ImageFrame src={featured[0].cover} alt="Portfolio hero placeholder" className="aspect-[4/5] md:aspect-[3/4]" priority />
+            <ImageFrame src={featured[0].cover} alt={`${featured[0].title} cover image`} className="aspect-[4/5] md:aspect-[3/4]" priority />
           </div>
         </div>
       </section>
 
       <section className="page-x py-24">
-        <SectionHeading eyebrow="Selected Work" title="An editorial overview of studio, competition, research, and professional project placeholders." />
+        <SectionHeading eyebrow="Selected Work" title="An editorial overview of studio, competition, research, and professional projects." />
         <div className="mt-12 grid gap-12 md:grid-cols-12">
           {featured.map((project, index) => (
             <ScrollReveal key={project.slug} className={index === 0 ? "md:col-span-7" : index === 1 ? "md:col-span-5 md:pt-24" : "md:col-span-4"}>
@@ -53,3 +53,4 @@ export default function HomePage() {
     </>
   );
 }
+
