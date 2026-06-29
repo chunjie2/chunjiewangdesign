@@ -37,7 +37,7 @@ export function ProjectModules({ project }: { project: Project }) {
             <X size={28} />
           </button>
           <button className="relative h-full w-full max-w-7xl" type="button" onClick={() => setViewerImage(null)}>
-            <ImageFrame src={viewerImage} alt={`${project.title} enlarged image`} className="h-full w-full bg-transparent" />
+            <ImageFrame src={viewerImage} alt={`${project.title} enlarged image`} className="h-full w-full bg-transparent" fit="contain" />
           </button>
         </div>
       ) : null}
@@ -145,3 +145,4 @@ function ProjectModuleRenderer({ module, onOpen }: { module: ProjectModule; onOp
     </section>
   );
 }
+
