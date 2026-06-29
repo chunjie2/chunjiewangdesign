@@ -1,0 +1,247 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Kinder Space | Project</title>
+
+  <!-- Tailwind + 字体（与主页一致） -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <!-- 站点样式 -->
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body class="font-sans text-neutral-900 bg-white">
+  <!-- 顶部：与主页一致 -->
+  <header class="sticky top-0 z-50 bg-white/90 backdrop-blur">
+    <div class="mx-auto max-w-[1200px] px-5">
+      <div class="h-[64px] flex items-center justify-between">
+        <a href="index.html" class="text-[22px] leading-none tracking-tight">Radian</a>
+        <a href="index.html#contact" class="btn-pill">Contact</a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- 1) 大图幻灯片（等高 + 左右箭头 + 计数） -->
+<section class="pt-6">
+  <div class="mx-auto max-w-[1200px] px-5">
+    <div class="relative">
+      <div class="hero-aspect relative">
+  <img id="heroSlide" src="link/Kinder%20Space/kinderspace-01-rocket.png" alt="Project image">
+  <!-- 左右半屏透明点击区：用系统光标 -->
+  <div id="hoverLeft"  class="hover-zone hover-left"></div>
+  <div id="hoverRight" class="hover-zone hover-right"></div>
+</div>
+
+
+
+      <!-- 左右箭头 -->
+      <button class="gallery-arrow left" id="heroPrev" aria-label="Previous">
+        <svg viewBox="0 0 24 24" class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="1.5">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M15 6l-6 6 6 6"/>
+        </svg>
+      </button>
+      <button class="gallery-arrow right" id="heroNext" aria-label="Next">
+        <svg viewBox="0 0 24 24" class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="1.5">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M9 6l6 6-6 6"/>
+        </svg>
+      </button>
+
+      <!-- 计数器 -->
+      <div class="absolute bottom-3 right-3 text-xs bg-white/90 backdrop-blur px-2 py-1 rounded">
+        <span id="heroIndex">1</span>/<span id="heroTotal">12</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+    <!-- 2) 文字内容 -->
+    <section class="mt-10 md:mt-14">
+      <div class="mx-auto max-w-[1000px] px-5 space-y-6">
+        <h1 class="text-3xl md:text-4xl font-semibold tracking-tight">Kinder Space</h1>
+        <p class="text-neutral-600 leading-7">
+          这里写项目简介：定位、场地、设计策略、用户群体等。建议 2–3 段，便于浏览。
+        </p>
+        <p class="text-neutral-600 leading-7">
+          设计要点：材料与结构、空间组织、光影策略、可持续性等。可以插入更多小标题与段落。
+        </p>
+        <p class="text-neutral-600 leading-7">
+          基本信息：Los Angeles, 2025 · 面积/类型 · 团队/摄影版权等。
+        </p>
+      </div>
+    </section>
+
+<!-- 3) 缩略图墙（点击→全屏 Lightbox） -->
+<section class="mt-16">
+  <div class="mx-auto max-w-[1200px] px-5">
+    <h2 class="section-h2 mb-6">Gallery</h2>
+    <div id="thumbGrid" class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
+  <button class="thumb" data-idx="0"><img src="link/Kinder%20Space/kinderspace-01-rocket.png"  alt="Rocket room"></button>
+  <button class="thumb" data-idx="1"><img src="link/Kinder%20Space/kinderspace-02-mutiuse.png"  alt="Multi-use space"></button>
+  <button class="thumb" data-idx="2"><img src="link/Kinder%20Space/kinderspace-03-elevation.png" alt="Elevation"></button>
+  <button class="thumb" data-idx="3"><img src="link/Kinder%20Space/kinderspace-04-slides.png"    alt="Slides"></button>
+  <button class="thumb" data-idx="4"><img src="link/Kinder%20Space/kinderspace-05-hallway.png"   alt="Hallway"></button>
+  <button class="thumb" data-idx="5"><img src="link/Kinder%20Space/kinderspace-06-library.png"   alt="Library"></button>
+  <button class="thumb" data-idx="6"><img src="link/Kinder%20Space/kinderspace-07-birdseye.jpg"  alt="Bird’s-eye view"></button>
+  <button class="thumb" data-idx="7"><img src="link/Kinder%20Space/kinderspace-08-rocket.png"    alt="Rocket detail"></button>
+  <button class="thumb" data-idx="8"><img src="link/Kinder%20Space/kinderspace-09-diagram.png"   alt="Diagram"></button>
+  <button class="thumb" data-idx="9"><img src="link/Kinder%20Space/kinderspace-10-site.png"      alt="Site"></button>
+  <button class="thumb" data-idx="10"><img src="link/Kinder%20Space/kinderspace-11-plan.png"     alt="Plan"></button>
+  <button class="thumb" data-idx="11"><img src="link/Kinder%20Space/kinderspace-11-section.png"  alt="Section"></button>
+</div>
+
+  </div>
+</section>
+
+
+    <!-- 4) 黑底信息区（与主页一致） -->
+    <section class="mt-24 bg-black text-white">
+      <div class="mx-auto max-w-[1400px] px-5 py-16 md:py-20">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-10">
+          <div>
+            <img class="w-full object-cover rounded-sm aspect-[3/4] lg:aspect-[4/5]"
+                 src="images/kinderspace/kinderspace-07-birdseye.jpg" alt="">
+          </div>
+          <div class="grid sm:grid-cols-2 gap-x-16 gap-y-14">
+            <div>
+              <h3 class="dark-h3">Services</h3>
+              <ul class="dark-list"><li>Spatial Design</li><li>Education Space</li><li>Renovation + Retrofit</li></ul>
+            </div>
+            <div>
+              <h3 class="dark-h3">Clients</h3>
+              <ul class="dark-list"><li>—</li><li>—</li><li>—</li></ul>
+            </div>
+            <div>
+              <h3 class="dark-h3">Locations</h3>
+              <ul class="dark-list"><li>Los Angeles</li><li>—</li><li>—</li></ul>
+            </div>
+            <div>
+              <h3 class="dark-h3">Recognition</h3>
+              <ul class="dark-list"><li>—</li><li>—</li><li>—</li></ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="mt-16 grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div class="text-sm text-neutral-300">
+            <p>Architecture &<br>Spatial Design Services</p>
+          </div>
+          <div></div>
+          <div class="text-sm text-neutral-300 md:text-right">
+            <p><a class="hover:underline" href="mailto:email@example.com">email@example.com</a></p>
+            <p>(555)555-5555</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="py-10">
+    <div class="mx-auto max-w-[1200px] px-5 text-sm text-neutral-500">
+      © <span id="y"></span> Radian
+    </div>
+  </footer>
+
+  <!-- Lightbox 容器 -->
+  <div id="lightbox" class="lb hidden">
+    <div class="lb__backdrop" data-close></div>
+    <figure class="lb__figure">
+      <img id="lbImg" class="lb__img" src="" alt="">
+      <figcaption id="lbCap" class="lb__cap"></figcaption>
+    </figure>
+    <button id="lbPrev" class="lb__arrow left" aria-label="Previous">
+      <svg viewBox="0 0 24 24" class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M15 6l-6 6 6 6"/></svg>
+    </button>
+    <button id="lbNext" class="lb__arrow right" aria-label="Next">
+      <svg viewBox="0 0 24 24" class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M9 6l6 6-6 6"/></svg>
+    </button>
+    <button id="lbClose" class="lb__close" aria-label="Close">×</button>
+    <div class="lb__counter"><span id="lbIndex">1</span>/<span id="lbTotal">1</span></div>
+  </div>
+
+
+
+
+  <script>
+  // 年份（如果你有这一行就保留）
+  const yEl = document.getElementById('y');
+  if (yEl) yEl.textContent = new Date().getFullYear();
+
+  // ✅ 路径统一为 link/Kinder%20Space/（空格已转义）
+  const IMGS = [
+    {src: "link/Kinder%20Space/kinderspace-01-rocket.png",  cap: "Rocket room"},
+    {src: "link/Kinder%20Space/kinderspace-02-mutiuse.png", cap: "Multi-use space"},
+    {src: "link/Kinder%20Space/kinderspace-03-elevation.png", cap: "Elevation"},
+    {src: "link/Kinder%20Space/kinderspace-04-slides.png", cap: "Slides"},
+    {src: "link/Kinder%20Space/kinderspace-05-hallway.png", cap: "Hallway"},
+    {src: "link/Kinder%20Space/kinderspace-06-library.png", cap: "Library"},
+    {src: "link/Kinder%20Space/kinderspace-07-birdseye.jpg", cap: "Bird’s-eye view"},
+    {src: "link/Kinder%20Space/kinderspace-08-rocket.png", cap: "Rocket detail"},
+    {src: "link/Kinder%20Space/kinderspace-09-diagram.png", cap: "Diagram"},
+    {src: "link/Kinder%20Space/kinderspace-10-site.png", cap: "Site"},
+    {src: "link/Kinder%20Space/kinderspace-11-plan.png", cap: "Plan"},
+    {src: "link/Kinder%20Space/kinderspace-11-section.png", cap: "Section"}
+  ];
+
+  // ===== 首屏幻灯片（其余逻辑不变） =====
+  const heroImg   = document.getElementById('heroSlide');
+  const heroPrev  = document.getElementById('heroPrev');
+  const heroNext  = document.getElementById('heroNext');
+  const heroIndex = document.getElementById('heroIndex');
+  const heroTotal = document.getElementById('heroTotal');
+  let idx = 0;
+
+  if (heroImg && heroPrev && heroNext && heroIndex && heroTotal) {
+    heroTotal.textContent = IMGS.length;
+    function renderHero(){ heroImg.src = IMGS[idx].src; heroIndex.textContent = idx + 1; }
+    renderHero();
+    heroPrev.addEventListener('click', ()=>{ idx = (idx - 1 + IMGS.length) % IMGS.length; renderHero(); });
+    heroNext.addEventListener('click', ()=>{ idx = (idx + 1) % IMGS.length; renderHero(); });
+  }
+  document.getElementById('hoverLeft').addEventListener('click', ()=>{ idx = (idx - 1 + IMGS.length) % IMGS.length; renderHero(); });
+document.getElementById('hoverRight').addEventListener('click', ()=>{ idx = (idx + 1) % IMGS.length; renderHero(); });
+
+
+  // ===== Lightbox（保持你的原逻辑） =====
+  const lb = document.getElementById('lightbox');
+  const lbImg = document.getElementById('lbImg');
+  const lbCap = document.getElementById('lbCap');
+  const lbPrev = document.getElementById('lbPrev');
+  const lbNext = document.getElementById('lbNext');
+  const lbClose = document.getElementById('lbClose');
+  const lbIndex = document.getElementById('lbIndex');
+  const lbTotal = document.getElementById('lbTotal');
+  if (lb && lbImg && lbPrev && lbNext && lbClose && lbIndex && lbTotal) {
+    lbTotal.textContent = IMGS.length;
+    let cur = 0;
+    function openLB(i){ cur = i; renderLB(); lb.classList.remove('hidden'); document.body.classList.add('no-scroll'); }
+    function closeLB(){ lb.classList.add('hidden'); document.body.classList.remove('no-scroll'); }
+    function renderLB(){ const it = IMGS[cur]; lbImg.src = it.src; lbCap.textContent = it.cap || ""; lbIndex.textContent = cur + 1; }
+    lbPrev.addEventListener('click', ()=>{ cur = (cur - 1 + IMGS.length) % IMGS.length; renderLB(); });
+    lbNext.addEventListener('click', ()=>{ cur = (cur + 1) % IMGS.length; renderLB(); });
+    lbClose.addEventListener('click', closeLB);
+    lb.addEventListener('click', (e)=>{ if(e.target.hasAttribute('data-close')) closeLB(); });
+    if (heroImg) heroImg.addEventListener('click', ()=> openLB(idx));
+    const grid = document.getElementById('thumbGrid');
+    if (grid) grid.addEventListener('click', (e)=>{
+      const btn = e.target.closest('.thumb'); if(!btn) return;
+      const i = parseInt(btn.getAttribute('data-idx') || '0', 10);
+      openLB(i);
+    });
+    window.addEventListener('keydown', (e)=>{
+      if(lb.classList.contains('hidden')) return;
+      if(e.key === 'Escape') closeLB();
+      else if(e.key === 'ArrowLeft') lbPrev.click();
+      else if(e.key === 'ArrowRight') lbNext.click();
+    });
+  }
+</script>
+
+
+</body>
+</html>

@@ -1,0 +1,140 @@
+/* =========================================================
+   Base / Reset
+   ========================================================= */
+:root { --radius: 12px; }
+body {
+  font-family: "Inter", system-ui, -apple-system, Segoe UI, Arial, sans-serif;
+}
+img { border-radius: 2px; }
+.no-scroll { overflow: hidden; } /* Lightbox 打开时禁滚 */
+
+/* =========================================================
+   Buttons
+   ========================================================= */
+.btn-pill, .btn-ghost {
+  display: inline-flex; align-items: center; justify-content: center;
+  height: 34px; padding: 0 14px;
+  border: 1px solid #d4d4d8; border-radius: 9999px;
+  font-size: 14px; color: #111827; background: #fff;
+  transition: background .2s ease, transform .05s ease, border-color .2s ease;
+}
+.btn-pill:hover, .btn-ghost:hover { background:#f5f5f5; border-color:#cfcfd4; }
+.btn-pill:active, .btn-ghost:active { transform: translateY(1px); }
+
+/* 卡片悬浮时露出按钮（用于 Projects 卡片） */
+.group:hover .btn-pill { transition: opacity .2s ease, transform .2s ease; transform: translateY(0); }
+
+/* =========================================================
+   Typography
+   ========================================================= */
+.section-h2 {
+  font-size: 44px; line-height: 1.1; letter-spacing: -0.01em; font-weight: 600;
+}
+
+/* 黑底区标题与列表（与主页一致） */
+.dark-h3 { font-size: 28px; line-height: 1.2; font-weight: 600; margin-bottom: 12px; }
+.dark-list { list-style: none; padding: 0; margin: 0; }
+.dark-list li { color: #d4d4d8; line-height: 1.9; font-size: 14px; }
+
+/* =========================================================
+   Home: Projects 横向轮播
+   ========================================================= */
+/* 右侧悬浮箭头按钮（点击向右循环） */
+.carousel-arrow{
+  position: absolute; inset: 0 0 0 auto; margin: auto; right: -8px;
+  width: 36px; height: 36px; border: 1px solid #d4d4d8; border-radius: 9999px;
+  display: flex; align-items: center; justify-content: center;
+  background: #fff; color: #111827; box-shadow: 0 8px 20px rgba(0,0,0,.06);
+  transition: background .2s ease, border-color .2s ease, transform .05s ease;
+}
+.carousel-arrow:hover { background:#f5f5f5; border-color:#cfcfd4; }
+.carousel-arrow:active { transform: translateY(1px); }
+
+/* 轨道滚动停靠（与 Tailwind 的 gap 配合） */
+#projTrack { scroll-snap-type: x mandatory; }
+#projTrack > * { scroll-snap-align: start; }
+
+/* =========================================================
+   Project Page: 首屏大图幻灯片（等高）
+   ========================================================= */
+/* 用固定比例容器保证所有图片等高显示（类似 ArchDaily） */
+.hero-aspect{
+  position: relative; width: 100%;
+  /* 调整高度比例：45% 更扁，55% 更高 */
+  padding-top: 48%;
+  border-radius: 2px; overflow: hidden;
+}
+.hero-aspect > img{
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  object-fit: cover; cursor: zoom-in;
+}
+
+/* 幻灯片左右箭头（白底小圆角） */
+.gallery-arrow{
+  position: absolute; top: 50%; transform: translateY(-50%);
+  width: 38px; height: 38px; border: 1px solid #d4d4d8; border-radius: 9999px;
+  display: flex; align-items: center; justify-content: center;
+  background: #fff; color: #111827; box-shadow: 0 10px 22px rgba(0,0,0,.08);
+  transition: background .2s ease, border-color .2s ease, transform .05s ease, opacity .2s ease;
+  opacity: .95;
+}
+.gallery-arrow:hover { background:#f5f5f5; border-color:#cfcfd4; }
+.gallery-arrow:active { transform: translateY(-50%) translateY(1px); }
+.gallery-arrow.left  { left: 10px; }
+.gallery-arrow.right { right: 10px; }
+
+/* =========================================================
+   Thumbnails (缩略图墙)
+   ========================================================= */
+.thumb { display: block; overflow: hidden; border-radius: 4px; }
+.thumb img { width: 100%; height: 100%; object-fit: cover; transition: transform .25s ease; }
+.thumb:hover img { transform: scale(1.02); }
+
+/* =========================================================
+   Lightbox (全屏查看)
+   ========================================================= */
+.lb { position: fixed; inset: 0; z-index: 70; display: block; }
+.lb.hidden { display: none; }
+.lb__backdrop { position: absolute; inset: 0; background: rgba(15,15,15,.9); }
+
+.lb__figure { position: absolute; inset: 60px 60px 70px 60px; display: flex; flex-direction: column; gap: 12px; }
+@media (max-width: 640px) { .lb__figure { inset: 56px 14px 70px 14px; } }
+
+.lb__img { width: 100%; height: 100%; object-fit: contain; border-radius: 4px; background: #0b0b0b; }
+.lb__cap { color: #d4d4d8; font-size: 13px; line-height: 1.6; }
+
+.lb__arrow, .lb__close{
+  position: absolute; display: flex; align-items: center; justify-content: center;
+  width: 42px; height: 42px; border: 1px solid #3f3f46; border-radius: 9999px;
+  background: rgba(30,30,30,.8); color: #fff; backdrop-filter: blur(4px);
+  transition: background .2s ease, border-color .2s ease, transform .05s ease;
+}
+.lb__arrow:hover, .lb__close:hover { background: rgba(45,45,45,.9); border-color: #52525b; }
+.lb__arrow:active, .lb__close:active { transform: translateY(1px); }
+
+.lb__arrow.left  { left: 18px; top: 50%; transform: translateY(-50%); }
+.lb__arrow.right { right: 18px; top: 50%; transform: translateY(-50%);
+
+/* 幻灯片等高容器（你之前已有，留存即可） */
+/* .hero-aspect { position:relative; width:100%; padding-top:48%; overflow:hidden; }
+   .hero-aspect > img { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; } */
+
+/* 三分区点击层（不改变原布局，只负责鼠标形态与点击） */
+.hover-zone{
+  position:absolute; top:0; bottom:0;
+  background: transparent;
+  pointer-events: auto; /* 确保能接收点击 */
+}
+.hover-left   { left:0;   width:35%; cursor: w-resize; }
+.hover-center { left:35%; width:30%; cursor: zoom-in; }
+.hover-right  { right:0;  width:35%; cursor: e-resize; }
+
+/* 可选：悬浮时轻微暗角，给用户提示 */
+.hover-left:hover::after,
+.hover-right:hover::after{
+  content:""; position:absolute; inset:0; pointer-events:none; opacity:.10; transition:opacity .15s ease;
+}
+.hover-left:hover::after  { background: linear-gradient(90deg,  rgba(0,0,0,.35), rgba(0,0,0,0)); }
+.hover-right:hover::after { background: linear-gradient(270deg, rgba(0,0,0,.35), rgba(0,0,0,0)); }
+
