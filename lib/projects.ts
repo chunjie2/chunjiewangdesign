@@ -23,15 +23,6 @@ export type Project = {
   modules: ProjectModule[];
 };
 
-const images = [
-  "https://images.unsplash.com/photo-1518005020951-eccb494ad742?auto=format&fit=crop&w=1800&q=80",
-  "https://images.unsplash.com/photo-1494526585095-c41746248156?auto=format&fit=crop&w=1800&q=80",
-  "https://images.unsplash.com/photo-1496307653780-42ee777d4833?auto=format&fit=crop&w=1800&q=80",
-  "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1800&q=80",
-  "https://images.unsplash.com/photo-1511818966892-d7d671e672a2?auto=format&fit=crop&w=1800&q=80",
-  "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1800&q=80"
-];
-
 export const categories: { value: ProjectCategory | "all"; label: string }[] = [
   { value: "all", label: "All" },
   { value: "housing", label: "Housing" },
@@ -41,119 +32,226 @@ export const categories: { value: ProjectCategory | "all"; label: string }[] = [
   { value: "research", label: "Research" }
 ];
 
-const dancingTheaterImage = (file: string) => `/images/project-03-dancing-theater/${file}`;
+const projectImage = (folder: string, file: string) => `/images/${folder}/${file}`;
 
-const dancingTheater: Project = {
-  slug: "project-03",
-  title: "Dancing Theater",
-  category: "cultural",
-  year: "TBD",
-  location: "Location TBD",
-  status: "Academic Project",
-  role: "Design, drawings, physical model, visualization",
-  featured: true,
-  cover: dancingTheaterImage("cover.png"),
-  summary: "Project introduction placeholder. Final project description and design narrative will be added later.",
-  modules: [
-    {
-      type: "fullImage",
-      image: dancingTheaterImage("cover.png"),
-      caption: "Exterior visualization.",
-      fit: "contain",
-      aspectRatio: "1050 / 743"
-    },
-    {
-      type: "textImage",
-      heading: "Information Flow",
-      text: "Placeholder text for the project's research, performance typologies, and spatial concept.",
-      image: dancingTheaterImage("concept-information-flow.jpg")
-    },
-    {
-      type: "twoColumnImages",
-      images: [
-        { src: dancingTheaterImage("diagram-form-assets.png"), caption: "Form asset study." },
-        { src: dancingTheaterImage("process-composition-study.png"), caption: "Composition study." }
-      ]
-    },
-    {
-      type: "fullImage",
-      image: dancingTheaterImage("model-overview-01.png"),
-      caption: "Physical model overview 01."
-    },
-    {
-      type: "fullImage",
-      image: dancingTheaterImage("model-overview-02.png"),
-      caption: "Physical model overview 02."
-    },
-    {
-      type: "fullImage",
-      image: dancingTheaterImage("model-detail-01.png"),
-      caption: "Physical model detail."
-    },
-    {
-      type: "fullImage",
-      image: dancingTheaterImage("model-elevations-01.png"),
-      caption: "Physical model elevations.",
-      fit: "contain",
-      aspectRatio: "1428 / 1306"
-    },
-    {
-      type: "twoColumnImages",
-      images: [
-        { src: dancingTheaterImage("plan-top-floor-lobby.png"), caption: "Top floor plan / lobby." },
-        { src: dancingTheaterImage("plan-top-floor-lobby-portfolio.png"), caption: "Top floor plan / portfolio layout." }
-      ]
-    },
-    {
-      type: "drawing",
-      title: "Black Box Theaters",
-      image: dancingTheaterImage("section-black-box-theaters.png"),
-      note: "Section"
-    },
-    {
-      type: "contribution",
-      items: ["Concept development", "Physical and digital modeling", "Drawings and presentation package"]
-    }
-  ]
-};
+const fullImage = (image: string, caption: string, aspectRatio: string): ProjectModule => ({
+  type: "fullImage",
+  image,
+  caption,
+  fit: "contain",
+  aspectRatio
+});
 
-export const projects: Project[] = Array.from({ length: 12 }, (_, index) => {
-  if (index === 2) return dancingTheater;
+const coverProject = (folder: string, caption: string, aspectRatio: string): ProjectModule[] => [
+  fullImage(projectImage(folder, folder === "project-07-mexico city design school" ? "Cover.png" : "cover.png"), caption, aspectRatio)
+];
 
-  const category = categories[(index % (categories.length - 1)) + 1].value as ProjectCategory;
-  return {
-    slug: `project-${String(index + 1).padStart(2, "0")}`,
-    title: `Project Placeholder ${String(index + 1).padStart(2, "0")}`,
-    category,
-    year: `${2021 + (index % 5)}`,
-    location: ["Los Angeles", "Chicago", "New York", "Seattle"][index % 4],
-    status: ["Academic", "Competition", "Built Study"][index % 3],
-    role: "Design, drawings, model, visualization",
-    featured: index < 5,
-    cover: images[index % images.length],
-    summary: "Placeholder project summary for layout testing, editorial hierarchy, and responsive behavior.",
+const urbanFolder = "project-01-urban-threshold";
+const louvreFolder = "project-02-the-louvre-byzantine-gallery";
+const danceFolder = "project-03-dancing-theater";
+
+export const projects: Project[] = [
+  {
+    slug: "project-01",
+    title: "Urban Threshold",
+    category: "research",
+    year: "鈥?,
+    location: "鈥?,
+    status: "Academic Project",
+    role: "Design, drawings, physical model, visualization",
+    featured: true,
+    cover: projectImage(urbanFolder, "cover.png"),
+    summary: "Urban Threshold is presented through site, massing, model, axonometric, and visualization studies.",
     modules: [
-      { type: "fullImage", image: images[index % images.length], caption: "Full-width image placeholder." },
+      fullImage(projectImage(urbanFolder, "cover.png"), "Urban Threshold.", "1645 / 1155"),
+      fullImage(projectImage(urbanFolder, "site model.png"), "Site model.", "4961 / 3508"),
+      fullImage(projectImage(urbanFolder, "massingconcept.png"), "Massing concept study 01.", "2480 / 3508"),
+      fullImage(projectImage(urbanFolder, "massingconcept (2).png"), "Massing concept study 02.", "2481 / 3508"),
+      fullImage(projectImage(urbanFolder, "massing model 01.png"), "Massing model.", "1883 / 1168"),
+      fullImage(projectImage(urbanFolder, "model01.png"), "Physical model 01.", "1107 / 812"),
+      fullImage(projectImage(urbanFolder, "model02.png"), "Physical model 02.", "1026 / 1449"),
+      fullImage(projectImage(urbanFolder, "ixomatric.png"), "Axonometric drawing.", "2480 / 3508"),
+      fullImage(projectImage(urbanFolder, "render01.png"), "Visualization 01.", "1845 / 1195"),
+      fullImage(projectImage(urbanFolder, "render02.png"), "Visualization 02.", "1845 / 1195"),
+      fullImage(projectImage(urbanFolder, "(3).png"), "Project drawing 01.", "2480 / 1754"),
+      fullImage(projectImage(urbanFolder, "(4).png"), "Project drawing 02.", "2481 / 1754")
+    ]
+  },
+  {
+    slug: "project-02",
+    title: "The Louvre Byzantine Gallery",
+    category: "cultural",
+    year: "2026",
+    location: "The Louvre Museum, Paris",
+    status: "Under Construction",
+    role: "Intern, WHY Architecture",
+    featured: true,
+    cover: projectImage(louvreFolder, "cover.png"),
+    summary: "A museum gallery project for the Louvre Museum in Paris, developed at WHY Architecture and currently under construction.",
+    modules: [
+      fullImage(projectImage(louvreFolder, "cover.png"), "The Louvre Byzantine Gallery.", "1583 / 992"),
+      fullImage(projectImage(louvreFolder, "183-01.png"), "Gallery study 01.", "1583 / 992"),
+      fullImage(projectImage(louvreFolder, "174-01.png"), "Gallery study 02.", "1583 / 992")
+    ]
+  },
+  {
+    slug: "project-03",
+    title: "Dancing Theater",
+    category: "cultural",
+    year: "Fall 2023",
+    location: "Pico-Union, Los Angeles",
+    status: "Individual Design Studio Project",
+    role: "Design, drawings, physical model, visualization",
+    featured: true,
+    cover: projectImage(danceFolder, "cover.png"),
+    summary: "LA Dance Project, developed in Devyn Weiser鈥檚 design studio as an individual project in Pico-Union, Los Angeles.",
+    modules: [
+      fullImage(projectImage(danceFolder, "cover.png"), "Dancing Theater.", "1050 / 743"),
+      {
+        type: "textImage",
+        heading: "Information Flow",
+        text: "A conceptual study of information flow, performance, and spatial organization.",
+        image: projectImage(danceFolder, "concept-information-flow.jpg")
+      },
       {
         type: "twoColumnImages",
         images: [
-          { src: images[(index + 1) % images.length], caption: "Process image placeholder." },
-          { src: images[(index + 2) % images.length], caption: "Material study placeholder." }
+          { src: projectImage(danceFolder, "diagram-form-assets.png"), caption: "Form asset study." },
+          { src: projectImage(danceFolder, "process-composition-study.png"), caption: "Composition study." }
         ]
       },
+      fullImage(projectImage(danceFolder, "model-overview-01.png"), "Physical model overview 01.", "2480 / 1754"),
+      fullImage(projectImage(danceFolder, "model-overview-02.png"), "Physical model overview 02.", "2481 / 1754"),
+      fullImage(projectImage(danceFolder, "model-detail-01.png"), "Physical model detail.", "2480 / 1754"),
+      fullImage(projectImage(danceFolder, "model-elevations-01.png"), "Physical model elevations.", "1428 / 1306"),
       {
-        type: "textImage",
-        heading: "Design Framework",
-        text: "Placeholder text describing design intent, constraints, spatial strategy, and architectural logic.",
-        image: images[(index + 3) % images.length]
+        type: "twoColumnImages",
+        images: [
+          { src: projectImage(danceFolder, "plan-top-floor-lobby.png"), caption: "Top floor plan / lobby." },
+          { src: projectImage(danceFolder, "plan-top-floor-lobby-portfolio.png"), caption: "Top floor plan / portfolio layout." }
+        ]
       },
-      { type: "drawing", title: "Drawing Module", image: images[(index + 4) % images.length], note: "Plan, section, diagram, or detail placeholder." },
-      { type: "gallery", images: [images[0], images[1], images[2], images[3]] },
-      { type: "video", title: "Video Module", poster: images[(index + 5) % images.length] },
-      { type: "contribution", items: ["Concept development", "Physical and digital modeling", "Drawings and presentation package"] }
+      { type: "drawing", title: "Black Box Theaters", image: projectImage(danceFolder, "section-black-box-theaters.png"), note: "Section" }
     ]
-  };
-});
+  },
+  {
+    slug: "project-04",
+    title: "3 Buildings in One + a Courtyard",
+    category: "civic",
+    year: "Spring 2023",
+    location: "Los Angeles",
+    status: "Individual DS1100 Project",
+    role: "Design Studio 路 Tutor: Matthew Au",
+    featured: true,
+    cover: projectImage("project-04-3-building-in-one", "cover.png"),
+    summary: "A civic center developed as three buildings in one, organized around a courtyard.",
+    modules: coverProject("project-04-3-building-in-one", "3 Buildings in One + a Courtyard.", "1637 / 1158")
+  },
+  {
+    slug: "project-05",
+    title: "Denver Single Stair",
+    category: "housing",
+    year: "鈥?,
+    location: "Denver, Colorado",
+    status: "Housing Project",
+    role: "Design, drawings, visualization",
+    featured: true,
+    cover: projectImage("project-05-denver-single-stair", "cover.png"),
+    summary: "This single-stair housing project is rooted in setbacks that create open areas and private front and back yards for each unit. Masonry units give the building a grounded presence, while a lighter metal-mesh facade supports hanging gardens for shade, cooling, and a stronger connection to the outdoors.",
+    modules: coverProject("project-05-denver-single-stair", "Denver Single Stair.", "1440 / 1440")
+  },
+  {
+    slug: "project-06",
+    title: "Folding City",
+    category: "research",
+    year: "鈥?,
+    location: "鈥?,
+    status: "Design Project",
+    role: "Design, drawings, visualization",
+    featured: false,
+    cover: projectImage("project-06-Folding City", "cover.png"),
+    summary: "Folding City explores urban form through an architectural design study.",
+    modules: coverProject("project-06-Folding City", "Folding City.", "1637 / 1158")
+  },
+  {
+    slug: "project-07",
+    title: "Mexico City Design School",
+    category: "civic",
+    year: "Spring 2024",
+    location: "IMSS, Mexico City",
+    status: "Group DS3501 Project",
+    role: "Design Studio 路 Tutor: David Freeland",
+    featured: false,
+    cover: projectImage("project-07-mexico city design school", "Cover.png"),
+    summary: "A group design studio project for a design school at IMSS in Mexico City.",
+    modules: coverProject("project-07-mexico city design school", "Mexico City Design School.", "1835 / 1187")
+  },
+  {
+    slug: "project-08",
+    title: "Kinder Space",
+    category: "civic",
+    year: "Spring 2024",
+    location: "IMSS, Mexico City",
+    status: "Group Competition Project",
+    role: "Competition 路 Tutor: John Enright",
+    featured: false,
+    cover: projectImage("project-08-kinder space", "cover.png"),
+    summary: "A group competition project developed for the IMSS site in Mexico City.",
+    modules: coverProject("project-08-kinder space", "Kinder Space.", "1078 / 809")
+  },
+  {
+    slug: "project-09",
+    title: "Art Brut Therapy Center",
+    category: "cultural",
+    year: "Fall 2021",
+    location: "Shanghai",
+    status: "Individual ARCH4107 Project",
+    role: "Design Studio 路 Tutor: Evan Saarinen",
+    featured: false,
+    cover: projectImage("project-09-Art Brut Therapy Center", "cover.png"),
+    summary: "Located in Shanghai鈥檚 historic New Puyu Hall, the project introduces treatment, music, meditation, art therapy, and mutual-aid spaces while preserving the original building. Its central aim is to improve psychological wellbeing through guidance, treatment, and interaction between different user groups.",
+    modules: coverProject("project-09-Art Brut Therapy Center", "Art Brut Therapy Center.", "1240 / 877")
+  },
+  {
+    slug: "project-10",
+    title: "BJICC Multifamily Housing",
+    category: "housing",
+    year: "鈥?,
+    location: "鈥?,
+    status: "Housing Project",
+    role: "Design, drawings, visualization",
+    featured: false,
+    cover: projectImage("project-10-BJICC Mutifamily Housing", "cover.png"),
+    summary: "A multifamily housing project developed for BJICC.",
+    modules: coverProject("project-10-BJICC Mutifamily Housing", "BJICC Multifamily Housing.", "2142 / 1598")
+  },
+  {
+    slug: "project-11",
+    title: "Collective Apartment",
+    category: "housing",
+    year: "鈥?,
+    location: "鈥?,
+    status: "Housing Project",
+    role: "Design, drawings, visualization",
+    featured: false,
+    cover: projectImage("project-11-Collective apartment", "cover.png"),
+    summary: "A collective apartment and shared-living design study.",
+    modules: coverProject("project-11-Collective apartment", "Collective Apartment.", "1240 / 877")
+  },
+  {
+    slug: "project-12",
+    title: "Lower East Side Study Center",
+    category: "civic",
+    year: "鈥?,
+    location: "Lower East Side, New York",
+    status: "Design Project",
+    role: "Design, drawings, visualization",
+    featured: false,
+    cover: projectImage("project-12-Lower east side study center", "cover.png"),
+    summary: "A study center proposal for New York鈥檚 Lower East Side.",
+    modules: coverProject("project-12-Lower east side study center", "Lower East Side Study Center.", "3618 / 2443")
+  }
+];
 
 export function getProject(slug: string) {
   return projects.find((project) => project.slug === slug);
@@ -166,3 +264,4 @@ export function getAdjacentProjects(slug: string) {
     next: projects[(index + 1) % projects.length]
   };
 }
+
