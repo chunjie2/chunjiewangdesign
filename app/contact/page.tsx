@@ -22,9 +22,13 @@ export default function ContactPage() {
         </div>
         <div className="col-span-12 grid gap-6 md:col-span-3">
           <p className="meta-label">Links</p>
-          {["LinkedIn", "Instagram", "Resume PDF"].map((item) => (
-            <Link key={item} href="#" className="border-b hairline pb-2 text-xl">
-              {item}
+          {[
+            { label: "LinkedIn", href: "https://www.linkedin.com/in/chunjie-wang-06b95b261" },
+            { label: "Instagram", href: "#" },
+            { label: "Resume PDF", href: "/Chunjie-Wang-Resume.pdf" }
+          ].map((item) => (
+            <Link key={item.label} href={item.href} className="border-b hairline pb-2 text-xl" target={item.href.startsWith("http") || item.href.endsWith(".pdf") ? "_blank" : undefined} rel={item.href.startsWith("http") ? "noreferrer" : undefined}>
+              {item.label}
             </Link>
           ))}
         </div>

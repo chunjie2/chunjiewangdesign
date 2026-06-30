@@ -11,9 +11,13 @@ export function Footer() {
           </Link>
         </div>
         <div className="col-span-12 flex gap-5 md:col-span-6 md:justify-end">
-          {["LinkedIn", "Instagram", "Resume"].map((item) => (
-            <Link key={item} href="/contact" className="meta-label hover:text-ink">
-              {item}
+          {[
+            { label: "LinkedIn", href: "https://www.linkedin.com/in/chunjie-wang-06b95b261" },
+            { label: "Instagram", href: "/contact" },
+            { label: "Resume", href: "/Chunjie-Wang-Resume.pdf" }
+          ].map((item) => (
+            <Link key={item.label} href={item.href} className="meta-label hover:text-ink" target={item.href.startsWith("http") || item.href.endsWith(".pdf") ? "_blank" : undefined} rel={item.href.startsWith("http") ? "noreferrer" : undefined}>
+              {item.label}
             </Link>
           ))}
         </div>
