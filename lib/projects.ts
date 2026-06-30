@@ -95,13 +95,21 @@ export const projects: Project[] = [
         videos: simulationVideos
       },
       fullImage(projectImage(urbanFolder, "massing model 01.png"), "Massing model.", "1883 / 1168"),
-      fullImage(projectImage(urbanFolder, "model01.png"), "Physical model 01.", "1107 / 812"),
-      fullImage(projectImage(urbanFolder, "model02.png"), "Physical model 02.", "1026 / 1449"),
       fullImage(projectImage(urbanFolder, "ixomatric.png"), "Axonometric drawing.", "2480 / 3508"),
       fullImage(projectImage(urbanFolder, "render01.png"), "Visualization 01.", "1845 / 1195"),
       fullImage(projectImage(urbanFolder, "render02.png"), "Visualization 02.", "1845 / 1195"),
       fullImage(projectImage(urbanFolder, "(3).png"), "Project drawing 01.", "2480 / 1754"),
-      fullImage(projectImage(urbanFolder, "(4).png"), "Project drawing 02.", "2481 / 1754")
+      fullImage(projectImage(urbanFolder, "(4).png"), "Project drawing 02.", "2481 / 1754"),
+      {
+        type: "twoColumnImages",
+        heading: "Chunk Models",
+        text: "Three physical model studies conclude the project by testing the threshold condition through mass, structure, enclosure, and sectional depth.",
+        images: [
+          { src: projectImage(urbanFolder, "model01.png"), caption: "Chunk model 01.", aspectRatio: "1107 / 812" },
+          { src: projectImage(urbanFolder, "model02.png"), caption: "Chunk model 02.", aspectRatio: "1026 / 1449" }
+        ]
+      },
+      fullImage(projectImage(urbanFolder, "Chunk model.png"), "Chunk model studies.", "2233 / 1688")
     ]
   },
   {
