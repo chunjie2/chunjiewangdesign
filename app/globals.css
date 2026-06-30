@@ -81,4 +81,52 @@ img {
   .focus-ring:focus-visible {
     outline-color: #171717;
   }
+
+  .architectural-range {
+    height: 18px;
+    appearance: none;
+    background: transparent;
+    cursor: pointer;
+  }
+
+  .architectural-range::-webkit-slider-runnable-track {
+    height: 1px;
+    background: #171717;
+  }
+
+  .architectural-range::-webkit-slider-thumb {
+    width: 15px;
+    height: 15px;
+    margin-top: -7px;
+    appearance: none;
+    border: 1px solid #171717;
+    border-radius: 999px;
+    background: #f7f6f1;
+    box-shadow: inset 0 0 0 4px #f7f6f1;
+  }
+
+  .architectural-range:focus-visible {
+    outline: 2px solid #171717;
+    outline-offset: 5px;
+  }
+
+  .architectural-range-vertical {
+    width: 18px;
+    height: min(52vw, 520px);
+    writing-mode: vertical-lr;
+    direction: rtl;
+  }
+
+  .architectural-range::-moz-range-track {
+    height: 1px;
+    background: #171717;
+  }
+
+  .architectural-range::-moz-range-thumb {
+    width: 15px;
+    height: 15px;
+    border: 1px solid #171717;
+    border-radius: 999px;
+    background: #f7f6f1;
+  }
 }

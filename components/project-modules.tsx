@@ -1,7 +1,8 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import { X } from "lucide-react";
+import { useEffect, useRef, useState } from "react";
+import { ArrowDownUp, Shuffle, X } from "lucide-react";
+import { AnimatePresence, motion } from "framer-motion";
 import { ImageFrame } from "@/components/image-frame";
 import type { Project, ProjectModule } from "@/lib/projects";
 
@@ -26,7 +27,7 @@ export function ProjectModules({ project }: { project: Project }) {
 
   return (
     <>
-      <div className="grid gap-24">
+      <div className="grid gap-20 md:gap-32">
         {project.modules.map((module, index) => (
           <ProjectModuleRenderer key={`${module.type}-${index}`} module={module} onOpen={setViewerImage} />
         ))}
@@ -45,66 +46,113 @@ export function ProjectModules({ project }: { project: Project }) {
   );
 }
 
+function ratioFrom(value?: string) {
+  if (!value) return 1;
+  const [width, height] = value.split("/").map(Number);
+  return width > 0 && height > 0 ? width / height : 1;
+}
+
 function ProjectModuleRenderer({ module, onOpen }: { module: ProjectModule; onOpen: (src: string) => void }) {
   if (module.type === "fullImage") {
+    const ratio = ratioFrom(module.aspectRatio);
+    const maxWidth = ratio < 0.92 ? `min(100%, ${Math.round(ratio * 78 * 10) / 10}vh)` : "min(100%, 1600px)";
+
     return (
-      <figure>
-        <button className="block w-full focus-ring" type="button" onClick={() => onOpen(module.image)}>
-          <ImageFrame
-            src={module.image}
-            alt={module.caption}
-            className={module.aspectRatio ? "w-full" : "aspect-[16/9]"}
-            fit={module.fit}
-            style={module.aspectRatio ? { aspectRatio: module.aspectRatio } : undefined}
-          />
-        </button>
-        <figcaption className="page-x meta-label mt-3">{module.caption}</figcaption>
+      <figure className="page-x">
+        <div className="mx-auto" style={{ maxWidth }}>
+          <button className="block w-full focus-ring" type="button" onClick={() => onOpen(module.image)}>
+            <ImageFrame
+              src={module.image}
+              alt={module.caption}
+              className="w-full max-h-[78vh] bg-transparent"
+              fit={module.fit ?? "contain"}
+              style={{ aspectRatio: module.aspectRatio ?? "16 / 9" }}
+            />
+          </button>
+          <figcaption className="meta-label mt-3 flex justify-between border-t hairline pt-3">
+            <span>{module.caption}</span>
+            <span>Open image</span>
+          </figcaption>
+        </div>
       </figure>
     );
   }
 
   if (module.type === "twoColumnImages") {
     return (
-      <div className="page-x grid gap-6 md:grid-cols-2">
-        {module.images.map((image) => (
-          <figure key={image.src}>
-            <button className="block w-full focus-ring" type="button" onClick={() => onOpen(image.src)}>
-              <ImageFrame src={image.src} alt={image.caption} className="aspect-[4/5]" />
-            </button>
-            <figcaption className="meta-label mt-3">{image.caption}</figcaption>
-          </figure>
-        ))}
-      </div>
+      <section className="page-x mx-auto w-full max-w-[1680px]">
+        {module.heading ? (
+          <div className="site-grid mb-10 border-t hairline pt-5">
+            <p className="meta-label col-span-12 md:col-span-3">Concept Study</p>
+            <div className="col-span-12 md:col-span-8 md:col-start-5">
+              <h2 className="text-3xl md:text-5xl">{module.heading}</h2>
+              {module.text ? <p className="mt-5 max-w-3xl text-base leading-7 text-muted md:text-lg">{module.text}</p> : null}
+            </div>
+          </div>
+        ) : null}
+        <div className="grid gap-6 md:grid-cols-2">
+          {module.images.map((image) => (
+            <figure key={image.src}>
+              <button className="block w-full focus-ring" type="button" onClick={() => onOpen(image.src)}>
+                <ImageFrame
+                  src={image.src}
+                  alt={image.caption}
+                  className="w-full max-h-[72vh] bg-transparent"
+                  fit="contain"
+                  style={{ aspectRatio: image.aspectRatio ?? "4 / 5" }}
+                />
+              </button>
+              <figcaption className="meta-label mt-3 border-t hairline pt-3">{image.caption}</figcaption>
+            </figure>
+          ))}
+        </div>
+      </section>
     );
   }
 
   if (module.type === "textImage") {
     return (
-      <section className="page-x site-grid items-start">
-        <div className="col-span-12 md:col-span-4 md:col-start-2">
-          <p className="meta-label">Module</p>
-          <h2 className="mt-4 text-3xl">{module.heading}</h2>
-          <p className="mt-6 max-w-md leading-7 text-muted">{module.text}</p>
+      <section className="page-x mx-auto w-full max-w-[1680px]">
+        <div className="site-grid items-center border-y hairline py-8 md:py-14">
+          <div className="col-span-12 md:col-span-4 md:col-start-1">
+            <p className="meta-label">Concept / Narrative</p>
+            <h2 className="mt-4 text-3xl md:text-5xl">{module.heading}</h2>
+            <p className="mt-6 max-w-lg text-base leading-7 text-muted md:text-lg md:leading-8">{module.text}</p>
+          </div>
+          <button className="col-span-12 block focus-ring md:col-span-7 md:col-start-6" type="button" onClick={() => onOpen(module.image)}>
+            <ImageFrame
+              src={module.image}
+              alt={module.heading}
+              className="w-full max-h-[72vh] bg-transparent"
+              fit="contain"
+              style={{ aspectRatio: module.aspectRatio ?? "5 / 4" }}
+            />
+          </button>
         </div>
-        <button className="col-span-12 block focus-ring md:col-span-6 md:col-start-7" type="button" onClick={() => onOpen(module.image)}>
-          <ImageFrame src={module.image} alt={module.heading} className="aspect-[5/4]" />
-        </button>
       </section>
     );
   }
 
   if (module.type === "drawing") {
     return (
-      <section className="page-x">
+      <section className="page-x mx-auto w-full max-w-[1680px]">
         <div className="mb-4 flex items-end justify-between border-b hairline pb-3">
-          <h2 className="text-2xl">{module.title}</h2>
+          <h2 className="text-2xl md:text-4xl">{module.title}</h2>
           <p className="meta-label">{module.note}</p>
         </div>
         <button className="block w-full focus-ring" type="button" onClick={() => onOpen(module.image)}>
-          <ImageFrame src={module.image} alt={module.title} className="aspect-[16/10]" />
+          <ImageFrame src={module.image} alt={module.title} className="aspect-[16/9] max-h-[78vh] w-full bg-transparent" fit="contain" />
         </button>
       </section>
     );
+  }
+
+  if (module.type === "airportDiagram") {
+    return <AirportDiagram module={module} onOpen={onOpen} />;
+  }
+
+  if (module.type === "simulationVideo") {
+    return <SimulationVideo module={module} />;
   }
 
   if (module.type === "gallery") {
@@ -122,7 +170,7 @@ function ProjectModuleRenderer({ module, onOpen }: { module: ProjectModule; onOp
   if (module.type === "video") {
     return (
       <section className="page-x">
-        <div className="relative">
+        <div className="relative mx-auto max-w-[1500px]">
           <ImageFrame src={module.poster} alt={module.title} className="aspect-video" />
           <div className="absolute inset-0 grid place-items-center bg-ink/20 text-paper">
             <span className="meta-label border border-paper px-4 py-3 text-paper">Video Placeholder</span>
@@ -137,12 +185,150 @@ function ProjectModuleRenderer({ module, onOpen }: { module: ProjectModule; onOp
       <h2 className="col-span-12 text-3xl md:col-span-4">Personal Contribution</h2>
       <ul className="col-span-12 grid gap-3 md:col-span-7 md:col-start-6">
         {module.items.map((item) => (
-          <li key={item} className="border-b hairline pb-3 text-lg">
-            {item}
-          </li>
+          <li key={item} className="border-b hairline pb-3 text-lg">{item}</li>
         ))}
       </ul>
     </section>
   );
 }
 
+function AirportDiagram({
+  module,
+  onOpen
+}: {
+  module: Extract<ProjectModule, { type: "airportDiagram" }>;
+  onOpen: (src: string) => void;
+}) {
+  const [time, setTime] = useState(0);
+  const [scale, setScale] = useState(0);
+  const index = scale * 3 + time;
+  const timeLabels = ["Before transit center", "Current condition", "Extended proposal"];
+  const scaleLabels = ["Site", "District", "Urban field"];
+
+  return (
+    <section className="page-x mx-auto w-full max-w-[1680px]">
+      <div className="border-y hairline py-6 md:py-10">
+        <div className="site-grid">
+          <div className="col-span-12 flex flex-col justify-between md:col-span-3">
+            <div>
+              <p className="meta-label">Interactive Atlas / 01</p>
+              <h2 className="mt-4 text-3xl md:text-5xl">{module.title}</h2>
+              <p className="mt-5 max-w-sm leading-7 text-muted">{module.description}</p>
+            </div>
+            <div className="mt-8 border-t hairline pt-4">
+              <p className="meta-label">Current reading</p>
+              <p className="mt-2 text-lg">{scaleLabels[scale]} · {timeLabels[time]}</p>
+              <p className="meta-label mt-2">Frame {String(index + 1).padStart(2, "0")} / 09</p>
+            </div>
+          </div>
+
+          <div className="col-span-12 mt-4 md:col-span-8 md:col-start-5 md:mt-0">
+            <div className="grid grid-cols-[44px_minmax(0,1fr)] gap-4 md:grid-cols-[64px_minmax(0,1fr)] md:gap-6">
+              <div className="flex flex-col items-center justify-between py-2">
+                <span className="meta-label [writing-mode:vertical-rl]">Urban field</span>
+                <input
+                  className="architectural-range architectural-range-vertical"
+                  type="range"
+                  min="0"
+                  max="2"
+                  step="1"
+                  value={scale}
+                  aria-label="Map scale"
+                  onChange={(event) => setScale(Number(event.target.value))}
+                />
+                <span className="meta-label [writing-mode:vertical-rl]">Site</span>
+              </div>
+              <button className="relative block aspect-square w-full overflow-hidden bg-white focus-ring" type="button" onClick={() => onOpen(module.images[index])}>
+                <AnimatePresence mode="wait">
+                  <motion.div
+                    key={module.images[index]}
+                    className="absolute inset-0"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                    transition={{ duration: 0.24 }}
+                  >
+                    <ImageFrame src={module.images[index]} alt={`${scaleLabels[scale]}, ${timeLabels[time]}`} className="h-full w-full bg-white" fit="contain" />
+                  </motion.div>
+                </AnimatePresence>
+              </button>
+            </div>
+            <div className="ml-[60px] mt-5 md:ml-[88px]">
+              <input
+                className="architectural-range w-full"
+                type="range"
+                min="0"
+                max="2"
+                step="1"
+                value={time}
+                aria-label="Project timeline"
+                onChange={(event) => setTime(Number(event.target.value))}
+              />
+              <div className="mt-3 grid grid-cols-3 gap-2">
+                {timeLabels.map((label, labelIndex) => (
+                  <span key={label} className={`meta-label ${labelIndex === 1 ? "text-center" : labelIndex === 2 ? "text-right" : ""}`}>{label}</span>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function SimulationVideo({ module }: { module: Extract<ProjectModule, { type: "simulationVideo" }> }) {
+  const [current, setCurrent] = useState(0);
+  const videoRef = useRef<HTMLVideoElement>(null);
+
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video) return;
+    video.load();
+    void video.play().catch(() => undefined);
+  }, [current]);
+
+  const randomize = () => {
+    if (module.videos.length < 2) return;
+    let next = current;
+    while (next === current) next = Math.floor(Math.random() * module.videos.length);
+    setCurrent(next);
+  };
+
+  return (
+    <section className="page-x mx-auto w-full max-w-[1680px]">
+      <div className="site-grid items-end border-y hairline py-6 md:py-10">
+        <div className="col-span-12 md:col-span-3">
+          <p className="meta-label">Generative Study / 02</p>
+          <h2 className="mt-4 text-3xl md:text-5xl">{module.title}</h2>
+          <p className="mt-5 max-w-sm leading-7 text-muted">{module.description}</p>
+          <div className="mt-8 flex items-center justify-between border-t hairline pt-4">
+            <span className="meta-label">Simulation {String(current + 1).padStart(2, "0")} / {String(module.videos.length).padStart(2, "0")}</span>
+            <ArrowDownUp size={16} aria-hidden="true" />
+          </div>
+        </div>
+        <div className="col-span-12 md:col-span-8 md:col-start-5">
+          <video
+            ref={videoRef}
+            className="aspect-video w-full bg-ink object-cover"
+            muted
+            loop
+            playsInline
+            controls
+            preload="metadata"
+          >
+            <source src={module.videos[current]} type="video/mp4" />
+          </video>
+          <button
+            className="focus-ring mt-4 flex w-full items-center justify-between border border-ink px-5 py-4 text-left transition-colors hover:bg-ink hover:text-paper"
+            type="button"
+            onClick={randomize}
+          >
+            <span className="meta-label text-current">Run another simulation</span>
+            <Shuffle size={18} aria-hidden="true" />
+          </button>
+        </div>
+      </div>
+    </section>
+  );
+}

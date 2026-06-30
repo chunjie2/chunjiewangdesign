@@ -2,11 +2,18 @@ export type ProjectCategory = "housing" | "civic" | "cultural" | "workplace" | "
 
 export type ProjectModule =
   | { type: "fullImage"; image: string; caption: string; fit?: "cover" | "contain"; aspectRatio?: string }
-  | { type: "twoColumnImages"; images: { src: string; caption: string }[] }
-  | { type: "textImage"; heading: string; text: string; image: string }
+  | {
+      type: "twoColumnImages";
+      heading?: string;
+      text?: string;
+      images: { src: string; caption: string; aspectRatio?: string }[];
+    }
+  | { type: "textImage"; heading: string; text: string; image: string; aspectRatio?: string }
   | { type: "drawing"; title: string; image: string; note: string }
   | { type: "gallery"; images: string[] }
   | { type: "video"; title: string; poster: string }
+  | { type: "airportDiagram"; title: string; description: string; images: string[] }
+  | { type: "simulationVideo"; title: string; description: string; videos: string[] }
   | { type: "contribution"; items: string[] };
 
 export type Project = {
@@ -49,6 +56,14 @@ const coverProject = (folder: string, caption: string, aspectRatio: string): Pro
 const urbanFolder = "project-01-urban-threshold";
 const louvreFolder = "project-02-the-louvre-byzantine-gallery";
 const danceFolder = "project-03-dancing-theater";
+const airportDiagramImages = Array.from(
+  { length: 9 },
+  (_, index) => `/interactive/airport-diagram/scale-${String(index + 1).padStart(2, "0")}.png`
+);
+const simulationVideos = Array.from(
+  { length: 10 },
+  (_, index) => `/interactive/simulations/simulation${index + 1}.mp4`
+);
 
 export const projects: Project[] = [
   {
@@ -65,8 +80,20 @@ export const projects: Project[] = [
     modules: [
       fullImage(projectImage(urbanFolder, "cover.png"), "Urban Threshold.", "1645 / 1155"),
       fullImage(projectImage(urbanFolder, "site model.png"), "Site model.", "4961 / 3508"),
+      {
+        type: "airportDiagram",
+        title: "Threshold at Three Scales",
+        description: "Move across time and scale to compare nine readings of the LAX transit landscape—from the site to the larger urban field.",
+        images: airportDiagramImages
+      },
       fullImage(projectImage(urbanFolder, "massingconcept.png"), "Massing concept study 01.", "2480 / 3508"),
       fullImage(projectImage(urbanFolder, "massingconcept (2).png"), "Massing concept study 02.", "2481 / 3508"),
+      {
+        type: "simulationVideo",
+        title: "Massing Simulation",
+        description: "Each run tests a different spatial outcome. Generate another iteration to move through the study as a sequence rather than a single fixed form.",
+        videos: simulationVideos
+      },
       fullImage(projectImage(urbanFolder, "massing model 01.png"), "Massing model.", "1883 / 1168"),
       fullImage(projectImage(urbanFolder, "model01.png"), "Physical model 01.", "1107 / 812"),
       fullImage(projectImage(urbanFolder, "model02.png"), "Physical model 02.", "1026 / 1449"),
@@ -110,25 +137,43 @@ export const projects: Project[] = [
       {
         type: "textImage",
         heading: "Information Flow",
-        text: "A conceptual study of information flow, performance, and spatial organization.",
-        image: projectImage(danceFolder, "concept-information-flow.jpg")
+        text: "The theater begins with movement rather than a fixed object. Dancers, audiences, production crews, and information pass through the building at different speeds; their crossings become a diagram for adjacency, visibility, and exchange.",
+        image: projectImage(danceFolder, "concept-information-flow.jpg"),
+        aspectRatio: "1071 / 922"
       },
       {
         type: "twoColumnImages",
+        heading: "Form as Choreography",
+        text: "The concept studies translate rhythm, overlap, pause, and direction into a family of spatial operations. The two drawings are presented as one continuous design argument: first a catalogue of formal assets, then their assembly into a larger composition.",
         images: [
-          { src: projectImage(danceFolder, "diagram-form-assets.png"), caption: "Form asset study." },
-          { src: projectImage(danceFolder, "process-composition-study.png"), caption: "Composition study." }
+          { src: projectImage(danceFolder, "diagram-form-assets.png"), caption: "Form asset study.", aspectRatio: "2480 / 3508" },
+          { src: projectImage(danceFolder, "process-composition-study.png"), caption: "Composition study.", aspectRatio: "2481 / 3508" }
         ]
       },
-      fullImage(projectImage(danceFolder, "model-overview-01.png"), "Physical model overview 01.", "2480 / 1754"),
-      fullImage(projectImage(danceFolder, "model-overview-02.png"), "Physical model overview 02.", "2481 / 1754"),
-      fullImage(projectImage(danceFolder, "model-detail-01.png"), "Physical model detail.", "2480 / 1754"),
-      fullImage(projectImage(danceFolder, "model-elevations-01.png"), "Physical model elevations.", "1428 / 1306"),
       {
         type: "twoColumnImages",
+        heading: "A Theater in Motion",
+        text: "The physical model tests the project as a layered field. Openings, bridges, and rotated volumes build visual relationships between rehearsal, performance, and public circulation.",
         images: [
-          { src: projectImage(danceFolder, "plan-top-floor-lobby.png"), caption: "Top floor plan / lobby." },
-          { src: projectImage(danceFolder, "plan-top-floor-lobby-portfolio.png"), caption: "Top floor plan / portfolio layout." }
+          { src: projectImage(danceFolder, "model-overview-01.png"), caption: "Physical model overview 01.", aspectRatio: "2480 / 1754" },
+          { src: projectImage(danceFolder, "model-overview-02.png"), caption: "Physical model overview 02.", aspectRatio: "2481 / 1754" }
+        ]
+      },
+      fullImage(projectImage(danceFolder, "model-detail-01.png"), "Physical model detail.", "2480 / 1754"),
+      {
+        type: "textImage",
+        heading: "Model as Notation",
+        text: "Seen in elevation, the model reads like a score: dense moments hold the main performance spaces while lighter connective pieces register circulation, gathering, and the intervals between events.",
+        image: projectImage(danceFolder, "model-elevations-01.png"),
+        aspectRatio: "1428 / 1306"
+      },
+      {
+        type: "twoColumnImages",
+        heading: "Performance and Public Life",
+        text: "The upper floor and lobby drawings show how the project brings performance into everyday circulation. Rather than treating the lobby as leftover space, it becomes an inhabited threshold between the city, rehearsal rooms, and black box theaters.",
+        images: [
+          { src: projectImage(danceFolder, "plan-top-floor-lobby.png"), caption: "Top floor plan / lobby.", aspectRatio: "2481 / 2481" },
+          { src: projectImage(danceFolder, "plan-top-floor-lobby-portfolio.png"), caption: "Top floor plan / portfolio layout.", aspectRatio: "2480 / 2480" }
         ]
       },
       { type: "drawing", title: "Black Box Theaters", image: projectImage(danceFolder, "section-black-box-theaters.png"), note: "Section" }
@@ -264,4 +309,3 @@ export function getAdjacentProjects(slug: string) {
     next: projects[(index + 1) % projects.length]
   };
 }
-
