@@ -55,7 +55,7 @@ function ratioFrom(value?: string) {
 function ProjectModuleRenderer({ module, onOpen }: { module: ProjectModule; onOpen: (src: string) => void }) {
   if (module.type === "fullImage") {
     const ratio = ratioFrom(module.aspectRatio);
-    const maxWidth = ratio < 0.92 ? `min(100%, ${Math.round(ratio * 78 * 10) / 10}vh)` : "min(100%, 1600px)";
+    const maxWidth = module.maximized || ratio >= 0.92 ? "min(100%, 1600px)" : `min(100%, ${Math.round(ratio * 78 * 10) / 10}vh)`;
 
     return (
       <figure className="page-x">
@@ -64,7 +64,7 @@ function ProjectModuleRenderer({ module, onOpen }: { module: ProjectModule; onOp
             <ImageFrame
               src={module.image}
               alt={module.caption}
-              className="w-full max-h-[78vh] bg-transparent"
+              className={`w-full bg-transparent ${module.maximized ? "" : "max-h-[78vh]"}`}
               fit={module.fit ?? "contain"}
               style={{ aspectRatio: module.aspectRatio ?? "16 / 9" }}
             />

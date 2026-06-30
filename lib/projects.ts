@@ -1,7 +1,7 @@
 export type ProjectCategory = "housing" | "civic" | "cultural" | "workplace" | "research";
 
 export type ProjectModule =
-  | { type: "fullImage"; image: string; caption: string; fit?: "cover" | "contain"; aspectRatio?: string }
+  | { type: "fullImage"; image: string; caption: string; fit?: "cover" | "contain"; aspectRatio?: string; maximized?: boolean }
   | {
       type: "twoColumnImages";
       heading?: string;
@@ -288,16 +288,9 @@ export const projects: Project[] = [
         ]
       },
       fullImage(projectImage("project-05-denver-single-stair", "(4).png"), "Single-stair organization study.", "1317 / 998"),
-      fullImage(projectImage("project-05-denver-single-stair", "plan.png"), "Housing plans and unit organization.", "1632 / 1878"),
-      {
-        type: "twoColumnImages",
-        heading: "Building in the City",
-        text: "The views compare the planted communal edge with the building's taller urban presence and masonry expression.",
-        images: [
-          { src: projectImage("project-05-denver-single-stair", "render.png"), caption: "Communal garden facade.", aspectRatio: "1579 / 1080" },
-          { src: projectImage("project-05-denver-single-stair", "render01.png"), caption: "Street elevation view.", aspectRatio: "1035 / 1261" }
-        ]
-      },
+      { type: "fullImage", image: projectImage("project-05-denver-single-stair", "plan.png"), caption: "Housing plans and unit organization.", fit: "contain", aspectRatio: "1632 / 1878", maximized: true },
+      { type: "fullImage", image: projectImage("project-05-denver-single-stair", "render.png"), caption: "Communal garden facade.", fit: "contain", aspectRatio: "1579 / 1080", maximized: true },
+      fullImage(projectImage("project-05-denver-single-stair", "render01.png"), "Street elevation view.", "1035 / 1261"),
       fullImage(projectImage("project-05-denver-single-stair", "render03.png"), "Material and landscape studies.", "1371 / 520"),
       fullImage(projectImage("project-05-denver-single-stair", "detail section.png"), "Facade detail section.", "603 / 401")
     ]
