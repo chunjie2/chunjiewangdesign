@@ -43,10 +43,10 @@ export default function HomePage() {
           <ImageFrame
             src="/images/profile/avatar.png"
             alt="Illustrated portrait of Chunjie Wang"
-            className="col-span-5 aspect-square bg-transparent md:col-span-2"
+            className="col-span-7 aspect-square bg-transparent md:col-span-3 md:[&_img]:scale-125"
             fit="contain"
           />
-          <div className="col-span-12 md:col-span-7 md:col-start-4">
+          <div className="col-span-12 md:col-span-7 md:col-start-5">
             <p className="text-3xl leading-tight md:text-5xl">
               Hi, I’m Chunjie Wang, an architectural designer based in Los Angeles and trained at SCI-Arc. I explore how architecture can shape experience, identity, and the way we engage with the world.
             </p>
