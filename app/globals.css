@@ -129,4 +129,9 @@ img {
     border-radius: 999px;
     background: #f7f6f1;
   }
+
+  .simulation-video::-webkit-media-controls,
+  .simulation-video::-webkit-media-controls-enclosure {
+    display: none !important;
+  }
 }

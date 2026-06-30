@@ -58,7 +58,7 @@ const louvreFolder = "project-02-the-louvre-byzantine-gallery";
 const danceFolder = "project-03-dancing-theater";
 const airportDiagramImages = Array.from(
   { length: 9 },
-  (_, index) => `/interactive/airport-diagram/scale-${String(index + 1).padStart(2, "0")}.png`
+  (_, index) => `/interactive/airport-diagram/scale-${String(index + 1).padStart(2, "0")}.jpg`
 );
 const simulationVideos = Array.from(
   { length: 10 },
@@ -91,7 +91,7 @@ export const projects: Project[] = [
       {
         type: "simulationVideo",
         title: "Massing Simulation",
-        description: "Each run tests a different spatial outcome. Generate another iteration to move through the study as a sequence rather than a single fixed form.",
+        description: "Each result records a different spatial outcome. Generate another iteration to watch the study resolve into a new form.",
         videos: simulationVideos
       },
       fullImage(projectImage(urbanFolder, "massing model 01.png"), "Massing model.", "1883 / 1168"),

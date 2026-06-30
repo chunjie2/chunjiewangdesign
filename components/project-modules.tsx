@@ -279,19 +279,43 @@ function AirportDiagram({
 
 function SimulationVideo({ module }: { module: Extract<ProjectModule, { type: "simulationVideo" }> }) {
   const [current, setCurrent] = useState(0);
+  const [isPlaying, setIsPlaying] = useState(false);
   const videoRef = useRef<HTMLVideoElement>(null);
+  const queuedPlayback = useRef(false);
 
   useEffect(() => {
     const video = videoRef.current;
     if (!video) return;
-    video.load();
-    void video.play().catch(() => undefined);
+
+    const prepareResult = () => {
+      if (!Number.isFinite(video.duration)) return;
+
+      if (queuedPlayback.current) {
+        queuedPlayback.current = false;
+        video.currentTime = 0;
+        void video.play().then(() => setIsPlaying(true)).catch(() => setIsPlaying(false));
+        return;
+      }
+
+      video.currentTime = Math.max(0, video.duration - 0.05);
+      video.pause();
+      setIsPlaying(false);
+    };
+
+    if (video.readyState >= 1) {
+      prepareResult();
+    } else {
+      video.addEventListener("loadedmetadata", prepareResult, { once: true });
+    }
+
+    return () => video.removeEventListener("loadedmetadata", prepareResult);
   }, [current]);
 
   const randomize = () => {
     if (module.videos.length < 2) return;
     let next = current;
     while (next === current) next = Math.floor(Math.random() * module.videos.length);
+    queuedPlayback.current = true;
     setCurrent(next);
   };
 
@@ -308,24 +332,33 @@ function SimulationVideo({ module }: { module: Extract<ProjectModule, { type: "s
           </div>
         </div>
         <div className="col-span-12 md:col-span-8 md:col-start-5">
-          <video
-            ref={videoRef}
-            className="aspect-video w-full bg-ink object-cover"
-            muted
-            loop
-            playsInline
-            controls
-            preload="metadata"
-          >
-            <source src={module.videos[current]} type="video/mp4" />
-          </video>
+          <div className="relative">
+            <video
+              key={module.videos[current]}
+              ref={videoRef}
+              className="simulation-video aspect-video w-full bg-ink object-cover"
+              muted
+              playsInline
+              preload="auto"
+              disablePictureInPicture
+              controlsList="nodownload nofullscreen noremoteplayback"
+              aria-label={`Simulation ${current + 1} ${isPlaying ? "playing" : "result"}`}
+              onEnded={() => setIsPlaying(false)}
+              onContextMenu={(event) => event.preventDefault()}
+            >
+              <source src={module.videos[current]} type="video/mp4" />
+            </video>
+            <span className="meta-label pointer-events-none absolute right-3 top-3 border border-ink/30 bg-paper/90 px-3 py-2 text-ink">
+              {isPlaying ? "Generating" : `Result ${String(current + 1).padStart(2, "0")}`}
+            </span>
+          </div>
           <button
-            className="focus-ring mt-4 flex w-full items-center justify-between border border-ink px-5 py-4 text-left transition-colors hover:bg-ink hover:text-paper"
+            className="focus-ring mt-4 inline-flex items-center gap-8 border border-ink px-5 py-3 transition-colors hover:bg-ink hover:text-paper"
             type="button"
             onClick={randomize}
           >
-            <span className="meta-label text-current">Run another simulation</span>
-            <Shuffle size={18} aria-hidden="true" />
+            <span className="meta-label text-current">Generate another result</span>
+            <Shuffle size={17} aria-hidden="true" />
           </button>
         </div>
       </div>
