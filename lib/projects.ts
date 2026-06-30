@@ -117,8 +117,40 @@ export const projects: Project[] = [
     summary: "A museum gallery project for the Louvre Museum in Paris, developed at WHY Architecture and currently under construction.",
     modules: [
       fullImage(projectImage(louvreFolder, "cover.png"), "The Louvre Byzantine Gallery.", "1583 / 992"),
-      fullImage(projectImage(louvreFolder, "183-01.png"), "Gallery study 01.", "1583 / 992"),
-      fullImage(projectImage(louvreFolder, "174-01.png"), "Gallery study 02.", "1583 / 992")
+      {
+        type: "twoColumnImages",
+        heading: "Gallery Atmospheres",
+        text: "A sequence of views studies how vaulted rooms, display cases, and focused lighting shape the visitor's movement through the collection.",
+        images: [
+          { src: projectImage(louvreFolder, "173.png"), caption: "Gallery view 173.", aspectRatio: "1494 / 940" },
+          { src: projectImage(louvreFolder, "174-01.png"), caption: "Gallery view 174.", aspectRatio: "1583 / 992" }
+        ]
+      },
+      {
+        type: "twoColumnImages",
+        images: [
+          { src: projectImage(louvreFolder, "183-01.png"), caption: "Gallery view 183.", aspectRatio: "1583 / 992" },
+          { src: projectImage(louvreFolder, "186-02.png"), caption: "Gallery view 186-02.", aspectRatio: "1494 / 940" }
+        ]
+      },
+      fullImage(projectImage(louvreFolder, "art map.png"), "Artwork and display map.", "1494 / 940"),
+      {
+        type: "twoColumnImages",
+        heading: "Display Development",
+        text: "Material, lighting, and casework studies refine the relationship between individual artifacts and the larger gallery sequence.",
+        images: [
+          { src: projectImage(louvreFolder, "186-02-01.png"), caption: "Display study 186-02.", aspectRatio: "1494 / 940" },
+          { src: projectImage(louvreFolder, "186-03-01.png"), caption: "Display study 186-03.", aspectRatio: "1494 / 940" }
+        ]
+      },
+      {
+        type: "twoColumnImages",
+        images: [
+          { src: projectImage(louvreFolder, "186-03.png"), caption: "Gallery view 186-03.", aspectRatio: "1494 / 940" },
+          { src: projectImage(louvreFolder, "186-04.png"), caption: "Gallery view 186-04.", aspectRatio: "1494 / 940" }
+        ]
+      },
+      fullImage(projectImage(louvreFolder, "188-01.png"), "Gallery view 188-01.", "1494 / 940")
     ]
   },
   {
@@ -190,7 +222,39 @@ export const projects: Project[] = [
     featured: true,
     cover: projectImage("project-04-3-building-in-one", "cover.png"),
     summary: "A civic center developed as three buildings in one, organized around a courtyard.",
-    modules: coverProject("project-04-3-building-in-one", "3 Buildings in One + a Courtyard.", "1637 / 1158")
+    modules: [
+      fullImage(projectImage("project-04-3-building-in-one", "cover.png"), "3 Buildings in One + a Courtyard.", "1637 / 1158"),
+      {
+        type: "twoColumnImages",
+        heading: "Courtyard and Massing",
+        text: "The civic center is assembled as three distinct volumes whose overlaps frame a shared courtyard and organize movement through the site.",
+        images: [
+          { src: projectImage("project-04-3-building-in-one", "(1).png"), caption: "Massing and courtyard study.", aspectRatio: "1389 / 1562" },
+          { src: projectImage("project-04-3-building-in-one", "(2).png"), caption: "Program and circulation study.", aspectRatio: "1389 / 1562" }
+        ]
+      },
+      {
+        type: "twoColumnImages",
+        heading: "Plans",
+        text: "The plans show how the three-building organization changes floor by floor while maintaining the courtyard as the project's shared center.",
+        images: [
+          { src: projectImage("project-04-3-building-in-one", "ground floor and 2 floor.png"), caption: "Ground and second floor plans.", aspectRatio: "880 / 1200" },
+          { src: projectImage("project-04-3-building-in-one", "3 and 4 floor.png"), caption: "Third and fourth floor plans.", aspectRatio: "881 / 1200" }
+        ]
+      },
+      fullImage(projectImage("project-04-3-building-in-one", "perspective section.png"), "Perspective section through the courtyard.", "1896 / 1200"),
+      fullImage(projectImage("project-04-3-building-in-one", "section.png"), "Building section.", "1710 / 1080"),
+      {
+        type: "twoColumnImages",
+        heading: "Physical Model",
+        text: "Model views test the relationship between the courtyard, the stepped volumes, and the building envelope at different scales.",
+        images: [
+          { src: projectImage("project-04-3-building-in-one", "model01.png"), caption: "Physical model 01.", aspectRatio: "1260 / 1700" },
+          { src: projectImage("project-04-3-building-in-one", "window(next to model01).png"), caption: "Facade and window study.", aspectRatio: "1260 / 1700" }
+        ]
+      },
+      fullImage(projectImage("project-04-3-building-in-one", "model02.png"), "Physical model 02.", "1580 / 1080")
+    ]
   },
   {
     slug: "project-05",
@@ -203,7 +267,40 @@ export const projects: Project[] = [
     featured: true,
     cover: projectImage("project-05-denver-single-stair", "cover.png"),
     summary: "This single-stair housing project is rooted in setbacks that create open areas and private front and back yards for each unit. Masonry units give the building a grounded presence, while a lighter metal-mesh facade supports hanging gardens for shade, cooling, and a stronger connection to the outdoors.",
-    modules: coverProject("project-05-denver-single-stair", "Denver Single Stair.", "1440 / 1440")
+    modules: [
+      fullImage(projectImage("project-05-denver-single-stair", "cover.png"), "Denver Single Stair.", "1440 / 1440"),
+      {
+        type: "twoColumnImages",
+        heading: "Setback as Living Space",
+        text: "Early studies use setbacks to carve private yards, shared gardens, and outdoor rooms from a compact single-stair housing block.",
+        images: [
+          { src: projectImage("project-05-denver-single-stair", "Concept 01.png"), caption: "Setback concept 01.", aspectRatio: "971 / 879" },
+          { src: projectImage("project-05-denver-single-stair", "conceopt02.png"), caption: "Setback concept 02.", aspectRatio: "1307 / 902" }
+        ]
+      },
+      {
+        type: "twoColumnImages",
+        heading: "Envelope and Garden",
+        text: "A masonry residential volume is paired with a lighter mesh structure that supports planting, shade, and inhabited outdoor edges.",
+        images: [
+          { src: projectImage("project-05-denver-single-stair", "(1).png"), caption: "Garden facade interior.", aspectRatio: "1393 / 842" },
+          { src: projectImage("project-05-denver-single-stair", "(3).png"), caption: "Garden facade exterior.", aspectRatio: "1395 / 932" }
+        ]
+      },
+      fullImage(projectImage("project-05-denver-single-stair", "(4).png"), "Single-stair organization study.", "1317 / 998"),
+      fullImage(projectImage("project-05-denver-single-stair", "plan.png"), "Housing plans and unit organization.", "1632 / 1878"),
+      {
+        type: "twoColumnImages",
+        heading: "Building in the City",
+        text: "The views compare the planted communal edge with the building's taller urban presence and masonry expression.",
+        images: [
+          { src: projectImage("project-05-denver-single-stair", "render.png"), caption: "Communal garden facade.", aspectRatio: "1579 / 1080" },
+          { src: projectImage("project-05-denver-single-stair", "render01.png"), caption: "Street elevation view.", aspectRatio: "1035 / 1261" }
+        ]
+      },
+      fullImage(projectImage("project-05-denver-single-stair", "render03.png"), "Material and landscape studies.", "1371 / 520"),
+      fullImage(projectImage("project-05-denver-single-stair", "detail section.png"), "Facade detail section.", "603 / 401")
+    ]
   },
   {
     slug: "project-06",

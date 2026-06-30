@@ -36,8 +36,7 @@ export default function AboutPage() {
         title="Education"
         items={[
           "SCI-Arc, M.Arch 1 / 2022-2025",
-          "Kean University, International Program / 2019-2020",
-          "Wenzhou-Kean University, B.A. Architectural Studies / 2018-2022"
+          "Kean University, Architectural Study, 2018-2022"
         ]}
       />
       <ProfileSection

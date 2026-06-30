@@ -42,7 +42,7 @@ export default function HomePage() {
           <p className="meta-label col-span-12 md:col-span-3">About Preview</p>
           <div className="col-span-12 md:col-span-7">
             <p className="text-3xl leading-tight md:text-5xl">
-              Chunjie Wang is an architectural designer based in Los Angeles, with training from SCI-Arc, Wenzhou-Kean University, and Kean University, and experience in design development, documentation, visualization, and spatial research.
+              Hi, I’m Chunjie Wang, an architectural designer based in Los Angeles and trained at SCI-Arc. I explore how architecture can shape experience, identity, and the way we engage with the world.
             </p>
             <Link href="/about" className="meta-label mt-8 inline-block border-b border-ink pb-2 text-ink">
               More about practice
@@ -53,4 +53,3 @@ export default function HomePage() {
     </>
   );
 }
-
