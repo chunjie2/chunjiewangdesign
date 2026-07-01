@@ -17,9 +17,15 @@ export default function HomePage() {
             <p className="meta-label">Junior Architectural Designer</p>
             <h1 className="mt-5 text-6xl leading-[0.94] md:text-8xl lg:text-9xl">Selected architectural works and spatial research.</h1>
           </div>
-          <div className="col-span-12 md:col-span-4 md:col-start-9">
-            <ImageFrame src={featured[0].cover} alt={`${featured[0].title} cover image`} className="aspect-[4/5] md:aspect-[3/4]" priority />
-          </div>
+          <figure className="col-span-12 md:col-span-4 md:col-start-9">
+            <ImageFrame
+              src="/images/profile/sci-arc-grad-thesis-2025.jpg"
+              alt="Chunjie Wang at the 2025 SCI-Arc Grad Thesis"
+              className="aspect-[1143/1280]"
+              priority
+            />
+            <figcaption className="meta-label mt-3 border-t hairline pt-3">2025 SCI-Arc Grad Thesis</figcaption>
+          </figure>
         </div>
       </section>
 
